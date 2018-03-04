@@ -1,0 +1,38 @@
+﻿<Window x:Class="BSK1.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BSK1.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <ComboBox Name="algCB" SelectedIndex="0" Margin="3" Height="20" Grid.Row="0" SelectionChanged="ComboBox_SelectionChanged" ItemsSource="{Binding ComboBoxItems}"  />
+
+
+        <StackPanel Name="KeyGrid" Grid.Column="2" Orientation="Horizontal"/>
+
+        <TextBox Name="input0tb" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="Encrypt" Click="Encrypt0"/>
+        <TextBox Name="output0tb" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap"/>
+
+        <TextBox Name="input1tb" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Decrypt" Click="Decrypt1"/>
+        <TextBox Name="output1tb" Grid.Row="3" Grid.Column="2" TextWrapping="Wrap"/>
+
+
+    </Grid>
+</Window>
