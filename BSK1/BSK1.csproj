@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caesar3a.cs" />
+    <Compile Include="Caesar3b.cs" />
     <Compile Include="ICrypter.cs" />
     <Compile Include="Matrix2a.cs" />
     <Compile Include="Matrix2b.cs" />
