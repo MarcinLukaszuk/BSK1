@@ -19,8 +19,11 @@ namespace BSK1
         {
             this.k0 = key0;
             this.k1 = key1;
-            eulerNumber = 12;
-            var alphabetArray = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
+            eulerNumber = 30;
+            var alphabet1 = Enumerable.Range('A', 26).Select(x => (char)x);
+            var alphabet2 = Enumerable.Range('a', 26).Select(x => (char)x);
+            var numbers = Enumerable.Range('0', 10).Select(x => (char)x);
+            var alphabetArray = (alphabet1.Concat(alphabet2)).Concat(numbers).ToArray();
             n = alphabetArray.Count();
             for (int i = 0; i < n; i++) alphabetDictionary.Add(alphabetArray[i], i);
         }
@@ -28,7 +31,6 @@ namespace BSK1
 
         public string Encrypt(string text)
         {
-            text = text.ToUpper();
             builder = new StringBuilder();
             for (int i = 0; i < text.Length; i++)
                 builder.Append(EncryptOneLetter(text[i]));
@@ -38,7 +40,6 @@ namespace BSK1
 
         public string Decrypt(string text)
         {
-            text = text.ToUpper();
             builder = new StringBuilder();
             for (int i = 0; i < text.Length; i++)
                 builder.Append(DecryptOneLetter(text[i]));
@@ -48,13 +49,15 @@ namespace BSK1
         private char EncryptOneLetter(char a)
         {
             if (a == ' ') return ' ';
-            return (char)((alphabetDictionary[a] * k1 + k0) % n + 65);
+            int value = (alphabetDictionary[a] * k1 + k0) % n;
+            return alphabetDictionary.FirstOrDefault(x => x.Value == value).Key;
         }
 
         private char DecryptOneLetter(char c)
         {
             if (c == ' ') return ' ';
-            return (char)(((alphabetDictionary[c] + (n - k0)) * (Math.Pow(k1, (eulerNumber - 1)))) % n + 65);
+            double value = ((alphabetDictionary[c] + (n - k0)) * (Math.Pow(k1, (eulerNumber - 1)))) % n;
+            return alphabetDictionary.FirstOrDefault(x => x.Value == value).Key;
         }
 
     }
