@@ -82,7 +82,7 @@ namespace BSK1
             //}
             //return (char)(charOut + 65);
 
-            int charOut = (alphabetDictionary[c] + (n - k0));
+            int charOut = (alphabetDictionary[c] + (n - k0)+62);
             for (int i = 0; i < 29; i++)
             {
                 charOut *= k1;

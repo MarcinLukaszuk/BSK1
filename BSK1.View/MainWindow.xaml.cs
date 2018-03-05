@@ -126,6 +126,7 @@ namespace BSK1.View
                     var tb5 = new TextBox() { Width = 40, Text = "5" };
                     var tb6 = new TextBox() { Width = 40, Text = "7" };
                     tb5.TextChanged += new TextChangedEventHandler(Key0Update);
+                    tb6.TextChanged += new TextChangedEventHandler(Key1Update);
                     KeyGrid.Children.Add(new Label() { Content = "Key0: " });
                     KeyGrid.Children.Add(tb5);
                     KeyGrid.Children.Add(new Label() { Content = "Key1: " });
