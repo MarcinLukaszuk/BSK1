@@ -8,13 +8,9 @@ namespace BSK1
 {
     public class Caesar3b : ICrypter
     {
-        Dictionary<char, int> alphabetUpperDictionary = new Dictionary<char, int>();
-        Dictionary<char, int> alphabetLowerDictionary = new Dictionary<char, int>();
-        Dictionary<char, int> numberDictionary = new Dictionary<char, int>();
+        Dictionary<char, int> alphabetDictionary = new Dictionary<char, int>();
         StringBuilder builder;
-        int upperCount;
-        int lowerCount;
-        int numberCount;
+        int n;
         int k0;
         int k1;
         int eulerNumber;
@@ -27,12 +23,17 @@ namespace BSK1
             var alphabetUpperArray = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
             var alphabetLowerArray = Enumerable.Range('a', 26).Select(x => (char)x).ToArray();
             var numberArray = Enumerable.Range('0', 10).Select(x => (char)x).ToArray();
-            upperCount = alphabetUpperArray.Count();
-            lowerCount= alphabetLowerArray.Count();
-            numberCount = numberArray.Count();
-            for (int i = 0; i < upperCount; i++) alphabetUpperDictionary.Add(alphabetUpperArray[i], i+65);
-            for (int i = 0; i < lowerCount; i++) alphabetLowerDictionary.Add(alphabetLowerArray[i], i+97);
-            for (int i = 0; i < numberCount; i++) numberDictionary.Add(numberArray[i], i+48);
+            int nUpper = alphabetUpperArray.Count();
+            int nLower = alphabetLowerArray.Count();
+            int nNumber = numberArray.Count();
+
+            char[] finalArray=new char[nUpper+nLower+nNumber];
+            Array.Copy(alphabetUpperArray, finalArray, nUpper);
+            Array.Copy(alphabetLowerArray,0, finalArray, nUpper,nLower);
+            Array.Copy(numberArray, 0, finalArray, nUpper+nLower, nNumber);
+
+            n = finalArray.Count();
+            for (int i = 0; i < n; i++) alphabetDictionary.Add(finalArray[i], i);
         }
 
         public string Encrypt(string text)
@@ -61,23 +62,9 @@ namespace BSK1
             {
                 return ' ';
             }
-            if (a >= 65 && a < 91)
-            {
-                return (char)(((a-65) * k1 + k0) % upperCount + 65);
-                
-            }
-            else if (a >= 97 && a < 123)
-            {
-                return (char)(((a-97) * k1 + k0) % lowerCount + 97);
-            }
-            else if (a >= 48 && a < 58)
-            {
-                return (char)(((a - 48) * k1 + k0) % numberCount + 48);
-            }
-            else
-            {
-                return ' ';
-            }
+            //var asasas = alphabetDictionary.Keys.ElementAt((((alphabetDictionary[a]) * k1 + k0) % n));
+            //return (char)(((alphabetDictionary[a]) * k1 + k0) % n);
+            return alphabetDictionary.Keys.ElementAt((((alphabetDictionary[a]) * k1 + k0) % n));
         }
 
         private char DecryptOneLetter(char c)
@@ -86,46 +73,22 @@ namespace BSK1
             {
                 return ' ';
             }
-            if (c >= 65 && c < 91)
+
+            //char charOut = (char)((c - 65) + (n - k0));
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    charOut *= (char)(k1);
+            //    charOut %= (char)(n);
+            //}
+            //return (char)(charOut + 65);
+
+            int charOut = (alphabetDictionary[c] + (n - k0));
+            for (int i = 0; i < 29; i++)
             {
-                char charOut = (char)((c - 65) + (upperCount - k0));
-
-                for (int i = 0; i < 11; i++)
-                {
-                    charOut *= (char)(k1);
-                    charOut %= (char)(upperCount);
-                }
-
-                return (char)(charOut + 65);
+                charOut *= k1;
+                charOut %= n;
             }
-            else if (c >= 97 && c < 123)
-            {
-                char charOut = (char)((c - 97) + (lowerCount - k0));
-
-                for (int i = 0; i < 11; i++)
-                {
-                    charOut *= (char)(k1);
-                    charOut %= (char)(lowerCount);
-                }
-
-                return (char)(charOut + 97);
-            }
-            else if (c >= 48 && c < 58)
-            {
-                char charOut = (char)((c - 48) + (numberCount - k0));
-
-                for (int i = 0; i < 11; i++)
-                {
-                    charOut *= (char)(k1);
-                    charOut %= (char)(numberCount);
-                }
-
-                return (char)(charOut + 48);
-            }
-            else
-            {
-                return ' ';
-            }
+            return alphabetDictionary.Keys.ElementAt(charOut);
         }
     }
 }

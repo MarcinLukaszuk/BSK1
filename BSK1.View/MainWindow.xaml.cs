@@ -121,10 +121,10 @@ namespace BSK1.View
                     KeyGrid.Children.Add(tb4);
                     break;
                 case Alghoritm.Caesar:
-                    Key0 = 3;
-                    Key1 = 3;
-                    var tb5 = new TextBox() { Width = 40, Text = "3" };
-                    var tb6 = new TextBox() { Width = 40, Text = "3" };
+                    Key0 = 5;
+                    Key1 = 7;
+                    var tb5 = new TextBox() { Width = 40, Text = "5" };
+                    var tb6 = new TextBox() { Width = 40, Text = "7" };
                     tb5.TextChanged += new TextChangedEventHandler(Key0Update);
                     KeyGrid.Children.Add(new Label() { Content = "Key0: " });
                     KeyGrid.Children.Add(tb5);
@@ -161,7 +161,7 @@ namespace BSK1.View
                     alghoritm = new Matrix2c(StringKey);
                     break;
                 case Alghoritm.Caesar:
-                    alghoritm = new Caesar3a(Key0, Key1);
+                    alghoritm = new Caesar3b(Key0, Key1);
                     break;
                 case Alghoritm.Vigenere:
                     alghoritm = new Vigenere(StringKey);
@@ -208,7 +208,7 @@ namespace BSK1.View
                     alghoritm = new Matrix2c(StringKey);
                     break;
                 case Alghoritm.Caesar:
-                    alghoritm = new Caesar3a(Key0, Key1);
+                    alghoritm = new Caesar3b(Key0, Key1);
                     break;
                 case Alghoritm.Vigenere:
                     alghoritm = new Vigenere(StringKey);
