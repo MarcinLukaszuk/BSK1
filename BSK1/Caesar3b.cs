@@ -19,21 +19,16 @@ namespace BSK1
         {
             this.k0 = key0;
             this.k1 = key1;
-            eulerNumber = 30;
-            var alphabetUpperArray = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
-            var alphabetLowerArray = Enumerable.Range('a', 26).Select(x => (char)x).ToArray();
-            var numberArray = Enumerable.Range('0', 10).Select(x => (char)x).ToArray();
-            int nUpper = alphabetUpperArray.Count();
-            int nLower = alphabetLowerArray.Count();
-            int nNumber = numberArray.Count();
+            eulerNumber = 40;
+            var alphabet1 = Enumerable.Range('A', 26).Select(x => (char)x);
+            var alphabet2 = Enumerable.Range('a', 26).Select(x => (char)x);
+            var numbers = Enumerable.Range('0', 10).Select(x => (char)x);
+            var signs = new char[] { 'ą', 'ć', 'ę', 'ł', 'ń', 'ó', 'ś', 'ź', 'ż', '.', ',' , '-', '!'};
 
-            char[] finalArray=new char[nUpper+nLower+nNumber];
-            Array.Copy(alphabetUpperArray, finalArray, nUpper);
-            Array.Copy(alphabetLowerArray,0, finalArray, nUpper,nLower);
-            Array.Copy(numberArray, 0, finalArray, nUpper+nLower, nNumber);
+            var alphabetArray = ((alphabet1.Concat(alphabet2)).Concat(numbers)).Concat(signs).ToArray();
 
-            n = finalArray.Count();
-            for (int i = 0; i < n; i++) alphabetDictionary.Add(finalArray[i], i);
+            n = alphabetArray.Count();
+            for (int i = 0; i < n; i++) alphabetDictionary.Add(alphabetArray[i], i);
         }
 
         public string Encrypt(string text)
@@ -82,7 +77,7 @@ namespace BSK1
             //}
             //return (char)(charOut + 65);
 
-            int charOut = (alphabetDictionary[c] + (n - k0)+62);
+            int charOut = (alphabetDictionary[c] + (n - k0)+n);
             for (int i = 1; i < eulerNumber; i++)
             {
                 charOut *= k1;
