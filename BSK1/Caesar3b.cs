@@ -19,7 +19,7 @@ namespace BSK1
         {
             this.k0 = key0;
             this.k1 = key1;
-            eulerNumber = 12;
+            eulerNumber = 30;
             var alphabetUpperArray = Enumerable.Range('A', 26).Select(x => (char)x).ToArray();
             var alphabetLowerArray = Enumerable.Range('a', 26).Select(x => (char)x).ToArray();
             var numberArray = Enumerable.Range('0', 10).Select(x => (char)x).ToArray();
@@ -83,11 +83,12 @@ namespace BSK1
             //return (char)(charOut + 65);
 
             int charOut = (alphabetDictionary[c] + (n - k0)+62);
-            for (int i = 0; i < 29; i++)
+            for (int i = 1; i < eulerNumber; i++)
             {
                 charOut *= k1;
                 charOut %= n;
             }
+
             return alphabetDictionary.Keys.ElementAt(charOut);
         }
     }
