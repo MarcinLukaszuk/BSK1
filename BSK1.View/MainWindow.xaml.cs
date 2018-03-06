@@ -100,11 +100,6 @@ namespace BSK1.View
                     KeyGrid.Children.Add(tb);
                     break;
                 case Alghoritm.Matrix2a:
-                    StringKey = "3-1-4-2";
-                    var tb2 = new TextBox() { Width = 150, Text = "3-1-4-2" };
-                    tb2.TextChanged += new TextChangedEventHandler(StringKeyUpdate);
-                    KeyGrid.Children.Add(new Label() { Content = "String Key: " });
-                    KeyGrid.Children.Add(tb2);
                     break;
                 case Alghoritm.Matrix2b:
                     StringKey = "CONVENIENCE";
@@ -153,7 +148,7 @@ namespace BSK1.View
                     alghoritm = new RailFence(Key0);
                     break;
                 case Alghoritm.Matrix2a:
-                    alghoritm = new Matrix2a(StringKey);
+                    alghoritm = new Matrix2aExtended();
                     break;
                 case Alghoritm.Matrix2b:
                     alghoritm = new Matrix2b(StringKey);
@@ -200,7 +195,7 @@ namespace BSK1.View
                     alghoritm = new RailFence(Key0);
                     break;
                 case Alghoritm.Matrix2a:
-                    alghoritm = new Matrix2a(StringKey);
+                    alghoritm = new Matrix2aExtended();
                     break;
                 case Alghoritm.Matrix2b:
                     alghoritm = new Matrix2b(StringKey);

@@ -48,6 +48,7 @@
     <Compile Include="Caesar3b.cs" />
     <Compile Include="ICrypter.cs" />
     <Compile Include="Matrix2a.cs" />
+    <Compile Include="Matrix2aExtended.cs" />
     <Compile Include="Matrix2b.cs" />
     <Compile Include="Matrix2c.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
